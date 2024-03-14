@@ -162,9 +162,10 @@ input[type="search"]::placeholder {
 }
 
 .day-container {
-  display: flex;
+  width: 100%;
   align-items: center;
-  justify-content: center;
+  display: flex;
+  justify-content: space-evenly;
 }
 .day,
 .max-min-value {
