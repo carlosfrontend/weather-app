@@ -1,7 +1,7 @@
 {
-  "name": "",
+  "name": "weather-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "A weather forecast application made with html, css and javascript",
   "main": "index.js",
   "private": true,
   "scripts": {
@@ -11,12 +11,12 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/carlosfrontend/weather-app.git"
   },
   "author": "carlosfrontend",
   "license": "ISC",
   "bugs": {
-    "url": ""
+    "url": "https://github.com/carlosfrontend/weather-app/issues"
   },
   "homepage": "",
   "devDependencies": {

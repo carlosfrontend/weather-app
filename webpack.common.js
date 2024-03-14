@@ -6,13 +6,14 @@ module.exports = {
   entry: './src/index.js',
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Starter Template',
-      favicon: '',
+      title: 'Weather APP',
+      favicon: 'favicon.png',
       filename: 'index.html',
       template: path.resolve(__dirname, 'src', 'index.html'),
       inject: true,
     }),
-  ], module: {
+  ],
+  module: {
     rules: [
       {
         test: /\.(?:js|mjs|cjs)$/,
@@ -21,10 +22,10 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: [
-              ['@babel/preset-env', { targets: 'defaults' }]
-            ]
-          }
-        }
+              ['@babel/preset-env', { targets: 'defaults' }],
+            ],
+          },
+        },
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,

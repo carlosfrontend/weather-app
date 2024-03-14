@@ -1,0 +1,315 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Merriweather", serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background-image: url(../images/nasa-i9w4Uy1pU-s-unsplash.jpg);
+  background-color: #201919b8;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center center;
+  background-blend-mode: darken;
+}
+
+#weather-container {
+  display: flex;
+  flex-direction: column;
+}
+
+#search-container {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  padding: 1em;
+  height: 10vh;
+  gap: 0.5em;
+}
+.search-button,
+.magnify-logo {
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+input[type="search"] {
+  height: 30px;
+  background-color: transparent;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 2px solid #ffffff;
+  padding: 0.5em;
+  outline: none;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+input[type="search"]::placeholder {
+  color: #bcb8b3;
+  font-weight: 200;
+  padding: 0.5em;
+}
+
+.units-button {
+  height: 30px;
+  width: 30px;
+  background-color: rgb(3, 106, 150);
+  color: #ffffff;
+  border-radius: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5em;
+  font-weight: 400;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.units-button:focus, .f-button:focus {
+  background-color: rgba(255, 255, 255, 0.872);
+  color: #022f42;
+}
+
+#date-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0.5em;
+}
+
+.date {
+  color: #ffffff;
+  font-style: italic;
+  font-weight: 600;
+}
+
+#location-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em;
+}
+
+.location,
+.status {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.city {
+  color: #ffffff;
+  font-weight: 900;
+}
+
+.temp,
+.status-text {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+#features-container {
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+}
+
+#features-nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 1em;
+}
+
+.card {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(30 53 61 / 74%);
+  border-radius: 10px;
+}
+
+.f-button {
+  width: 45vw;
+  height: 4vh;
+  background-color: rgb(3, 106, 150);
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.f-value {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.day-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.day,
+.max-min-value {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.item {
+  height: 6vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.daily-item {
+  height: 4vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgb(30 53 61 / 74%);
+  margin: 1em 0;
+}
+
+.max-min-value {
+  display: flex;
+  justify-self: center;
+}
+#footer {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #000000;
+  padding: 0.5em;
+}
+
+.footer-logo {
+  width: 101px;
+  height: 36px;
+  background-color: #000000;
+}
+
+@media screen and (min-width: 768px) {
+  #search-container {
+    grid-template-columns: 0.5fr auto 0.5fr;
+    align-items: center;
+  }
+
+  #units-container {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+  }
+  .f-button {
+    height: 5vh;
+    width: 22vw;
+    font-size: 1.2rem;
+  }
+
+  .item {
+    font-size: 1.2rem;
+  }
+
+  .card {
+    margin-top: 1em;
+    width: 50%;
+  }
+
+  #daily-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .daily-item {
+    width: 48%;
+    margin: 0.5em 0;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  #search-container {
+    grid-template-columns: .8fr auto 1fr;
+    align-items: center;
+  }
+
+  #search{
+    font-size: 1.5rem;
+    height: 60px;
+  }
+
+  .magnify-logo{
+    height: 50px;
+    width: 50px;
+  }
+
+  #units-container {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+  }
+  .units-button {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .city{
+    font-size: 3rem;
+  }
+
+  .temp, .status-text{
+    font-size: 1.3rem;
+  }
+  .f-button {
+    height: 6vh;
+    width: 14vw;
+    font-size: 1.4rem;
+  }
+
+  .item {
+    font-size: 1.4rem;
+  }
+
+  .card {
+    width: 40%;
+    margin-top: 1.2em;
+    width: 50%;
+  }
+
+  #daily-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .daily-item {
+    height: 6vh;
+    width: 49%;
+    margin: 0.6em 0;
+  }
+}

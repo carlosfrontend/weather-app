@@ -1,13 +1,13 @@
-# APP NAME ( Other content )
+# Weather APP
+
 ## The Odin Project
-A simple desciption
+
+A weather forecast application made with html, css and javascript.
 
 Links:
 
-:white_check_mark: [Assigments](!#) :blue_book:
+:white_check_mark: [Assigments](https://www.theodinproject.com/lessons/node-path-javascript-weather-app#assignment) :blue_book:
 
-:white_check_mark: [Live Preview](!#) :computer:
+:white_check_mark: [Live Preview](https://carlosfrontend.github.io/weather-app/) :computer:
 
-:white_check_mark: [Code](!#) :eight_spoked_asterisk:
-
- Happy Coding!! :coffee: :rocket:
+Happy Coding!! :coffee: :rocket:
