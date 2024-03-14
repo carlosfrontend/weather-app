@@ -209,6 +209,10 @@ input[type="search"]::placeholder {
   background-color: #000000;
 }
 
+.weather-api-image {
+  background-color: #ffffff;
+}
+
 @media screen and (min-width: 768px) {
   #search-container {
     grid-template-columns: 0.5fr auto 0.5fr;
