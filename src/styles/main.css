@@ -24,7 +24,7 @@ body {
   flex-direction: column;
 }
 
-#search-container {
+#search-form {
   display: grid;
   grid-template-columns: 1fr auto auto;
   padding: 1em;
@@ -75,7 +75,7 @@ input[type="search"]::placeholder {
   cursor: pointer;
 }
 
-.units-button:focus, .f-button:focus {
+.f-button:focus, .units-button.change-color {
   background-color: rgba(255, 255, 255, 0.872);
   color: #022f42;
 }
@@ -112,6 +112,7 @@ input[type="search"]::placeholder {
 .city {
   color: #ffffff;
   font-weight: 900;
+  text-align: center;
 }
 
 .temp,
@@ -214,7 +215,7 @@ input[type="search"]::placeholder {
 }
 
 @media screen and (min-width: 768px) {
-  #search-container {
+  #search-form {
     grid-template-columns: 0.5fr auto 0.5fr;
     align-items: center;
   }
@@ -253,7 +254,7 @@ input[type="search"]::placeholder {
 }
 
 @media screen and (min-width: 1024px) {
-  #search-container {
+  #search-form {
     grid-template-columns: .8fr auto 1fr;
     align-items: center;
   }

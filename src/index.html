@@ -13,35 +13,36 @@
   </head>
   <body>
     <div id="weather-container">
-      <div id="search-container">
+      <form method="post" action="/" id="search-form">
         <input
           type="search"
           id="search"
           name="search"
+          required
           placeholder="Put your city here"
         />
-        <button type="button" class="search-button">
+        <button type="submit" class="search-button">
           <img class="magnify-logo" src="#" alt="A magnify icon" />
         </button>
         <div id="units-container">
-          <button type="button" class="units-button">ºF</button>
+          <button type="button" class="units-button">ºC</button>
         </div>
-      </div>
+      </form>
       <div id="date-container">
-        <h3 class="date">Today, Monday 14</h3>
+        <h3 class="date"></h3>
       </div>
       <div id="location-container">
         <div class="location">
-          <h1 class="city">London</h1>
-          <span class="temp">24º C</span>
+          <h1 class="city"></h1>
+          <span class="temp"></span>
         </div>
         <div class="status">
           <img
             class="status-logo"
-            src="//cdn.weatherapi.com/weather/64x64/night/113.png"
+            src="#"
             alt="Logo"
           />
-          <span class="status-text">Partly Cloudy</span>
+          <span class="status-text"></span>
         </div>
       </div>
       <div id="features-container">
@@ -52,23 +53,23 @@
         </nav>
         <div class="card">
           <div class="item">
-            <span class="f-value">Max Temp: 20ºC </span>
+            <span id="first" class="f-value"></span>
           </div>
           <div class="item">
-            <span class="f-value">Min Temp: 8ºC </span>
+            <span id="second" class="f-value"></span>
           </div>
           <div class="item">
-            <span class="f-value">(Feels like): 6ºC </span>
+            <span id="third" class="f-value">(Feels like): 6ºC </span>
           </div>
         </div>
       </div>
       <div id="daily-container">
         <div class="daily-item">
           <div class="day-container">
-            <img
-              src="//cdn.weatherapi.com/weather/64x64/night/113.png"
+            <img class="days-logo"
+              src="#"
               alt=""
-            /><span class="day">Tomorrow</span>
+            /><span class="day weekday"></span>
             <div class="max-min-container">
               <span class="max-min-value">18º/5º</span>
             </div>
@@ -76,10 +77,10 @@
         </div>
         <div class="daily-item">
           <div class="day-container">
-            <img
-              src="//cdn.weatherapi.com/weather/64x64/night/113.png"
+            <img class="days-logo"
+              src="#"
               alt=""
-            /><span class="day">Tomorrow</span>
+            /><span class="day weekday"></span>
             <div class="max-min-container">
               <span class="max-min-value">18º/5º</span>
             </div>
@@ -87,10 +88,10 @@
         </div>
         <div class="daily-item">
           <div class="day-container">
-            <img
-              src="//cdn.weatherapi.com/weather/64x64/night/113.png"
+            <img class="days-logo"
+              src="#"
               alt=""
-            /><span class="day">Tomorrow</span>
+            /><span class="day weekday"></span>
             <div class="max-min-container">
               <span class="max-min-value">18º/5º</span>
             </div>
