@@ -33,38 +33,44 @@ giphyLogo.src = gifLogo;
 carlosfrontendLogo.src = carlosLogo;
 
 const getCurrrentLocationWeather = async () => {
-  const response = await fetch(
-    URI,
-    { mode: 'cors' },
-  );
-  const weatherData = await response.json();
-  if (!response.ok) {
-    throw Error(weatherData.error.message);
-  } else {
-    currentDate.textContent = `Today, ${format(weatherData.location.localtime, 'eeee do')}`;
-    currentStatusLogo.src = weatherData.current.condition.icon;
-    currentCity.textContent = `${weatherData.location.name}, ${weatherData.location.country}`;
-    currentTemp.textContent = `${weatherData.current.temp_c} ºC`;
-    currentConditionText.textContent = weatherData.current.condition.text;
-    daysLogos.forEach((logo, index) => {
-      const domLogo = logo;
-      domLogo.src = weatherData.forecast.forecastday[index].day.condition.icon;
-    });
-    weekDays.forEach((day, index) => {
-      const domDay = day;
-      domDay.textContent = format(weatherData.forecast.forecastday[index].date, 'eeee');
-    });
-    maxMinValues.forEach((value, index) => {
-      const domValue = value;
-      domValue.textContent = `${weatherData.forecast.forecastday[index].day.maxtemp_c}º / ${weatherData.forecast.forecastday[index].day.mintemp_c}º`;
-    });
-    tempButton.focus();
-    firstValue.textContent = `Max Temp: ${weatherData.forecast.forecastday[0].day.maxtemp_c} ºC`;
-    secondValue.textContent = `Min Temp: ${weatherData.forecast.forecastday[0].day.mintemp_c} ºC`;
-    thirdValue.textContent = `(Feels like): ${weatherData.current.feelslike_c} ºC`;
-    console.log(weatherData);
-    return weatherData;
+  const response = await fetch(URI, { mode: 'cors' });
+  if (!response.ok && response.status === 403) {
+    throw new Error('API key has been disabled.');
+  } else if (!response.ok && response.status === 401) {
+    throw new Error('API key not provided.');
+  } else if (!response.ok && response.status === 400) {
+    throw new Error('You need put a city name in the search field!');
   }
+
+  const weatherData = await response.json();
+  currentDate.textContent = `Today, ${format(
+    weatherData.location.localtime,
+    'eeee do',
+  )}`;
+  currentStatusLogo.src = weatherData.current.condition.icon;
+  currentCity.textContent = `${weatherData.location.name}, ${weatherData.location.country}`;
+  currentTemp.textContent = `${weatherData.current.temp_c} ºC`;
+  currentConditionText.textContent = weatherData.current.condition.text;
+  daysLogos.forEach((logo, index) => {
+    const domLogo = logo;
+    domLogo.src = weatherData.forecast.forecastday[index].day.condition.icon;
+  });
+  weekDays.forEach((day, index) => {
+    const domDay = day;
+    domDay.textContent = format(
+      weatherData.forecast.forecastday[index].date,
+      'eeee',
+    );
+  });
+  maxMinValues.forEach((value, index) => {
+    const domValue = value;
+    domValue.textContent = `${weatherData.forecast.forecastday[index].day.maxtemp_c}º / ${weatherData.forecast.forecastday[index].day.mintemp_c}º`;
+  });
+  tempButton.focus();
+  firstValue.textContent = `Max Temp: ${weatherData.forecast.forecastday[0].day.maxtemp_c} ºC`;
+  secondValue.textContent = `Min Temp: ${weatherData.forecast.forecastday[0].day.mintemp_c} ºC`;
+  thirdValue.textContent = `(Feels like): ${weatherData.current.feelslike_c} ºC`;
+  return weatherData;
 };
 
 const showAtomosInternationalSystem = async () => {
@@ -126,8 +132,6 @@ const showDefaultWeatherInCelsius = async () => {
       const domValue = value;
       domValue.textContent = `${data.forecast.forecastday[index].day.maxtemp_c}º / ${data.forecast.forecastday[index].day.mintemp_c}º`;
     });
-    console.log(data);
-    console.log('celsius');
   } catch (error) {
     alert(error);
   }
@@ -144,8 +148,6 @@ const showDefaultWeatherInFarenheit = async () => {
       const domValue = value;
       domValue.textContent = `${data.forecast.forecastday[index].day.maxtemp_f}º / ${data.forecast.forecastday[index].day.mintemp_f}º`;
     });
-    console.log(data);
-    console.log('farenheit');
   } catch (error) {
     alert(error);
   }
@@ -158,7 +160,12 @@ const handleTemperature = () => {
   if (unitsButton.textContent === 'ºF') showDefaultWeatherInFarenheit();
 };
 
-getCurrrentLocationWeather().catch((error) => alert(error));
+getCurrrentLocationWeather().catch((error) => {
+  if (error.message === 'Failed to fetch') {
+    alert('You need a Internet conexion');
+  }
+  alert(error);
+});
 unitsButton.addEventListener('click', handleTemperature);
 
 tempButton.addEventListener('click', () => {
@@ -178,10 +185,13 @@ windButton.addEventListener('click', () => {
 
 searchForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  console.log(e);
   const query = searchInput.value;
+
   URI = `https://api.weatherapi.com/v1/forecast.json?key=4d9f03d07f3643cd876174147240803&days=3&q=${query}&aqi=no`;
-  console.log(query);
-  getCurrrentLocationWeather().catch((error) => alert(error));
+
+  getCurrrentLocationWeather().catch((error) => {
+    alert(error);
+  });
+
   searchInput.value = '';
 });
