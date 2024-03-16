@@ -6,7 +6,10 @@ const gifLogo = new URL(
   './images/Poweredby_100px-White_VertLogo.png',
   import.meta.url,
 );
-const defaultbackgroundUrl = new URL('./images/nasa-i9w4Uy1pU-s-unsplash.jpg', import.meta.url);
+const defaultbackgroundUrl = new URL(
+  './images/nasa-i9w4Uy1pU-s-unsplash.jpg',
+  import.meta.url,
+);
 
 const carlosLogo = new URL('./images/carlosfrontend-logo.png', import.meta.url);
 const magnifyLogo = document.querySelector('.magnify-logo');
@@ -40,16 +43,19 @@ const getCurrentLocationBackground = async (condition) => {
     `https://api.giphy.com/v1/gifs/translate?api_key=uU7BhEfEscbnMatQy6DkKmF7hapwlMBD&s=${myStatus} weather`,
     { mode: 'cors' },
   );
+
   if (!response.ok) {
     document.body.style.backgroundImage = defaultbackgroundUrl;
-    throw new Error('Can\'t get a new background image');
+    throw new Error("Can't get a new background image");
   }
+
   const backgroundData = await response.json();
   document.body.style.backgroundImage = `url(${backgroundData.data.images.original.url})`;
 };
 
 const getCurrrentLocationWeather = async () => {
   const response = await fetch(URI, { mode: 'cors' });
+
   if (!response.ok && response.status === 403) {
     throw new Error('API key has been disabled.');
   } else if (!response.ok && response.status === 401) {
@@ -57,20 +63,26 @@ const getCurrrentLocationWeather = async () => {
   } else if (!response.ok && response.status === 400) {
     throw new Error('You need put a city name in the search field!');
   }
+
   const weatherData = await response.json();
-  getCurrentLocationBackground(weatherData.current.condition.text).catch((error) => alert(error));
+  getCurrentLocationBackground(weatherData.current.condition.text).catch(
+    (error) => alert(error),
+  );
   currentDate.textContent = `Today, ${format(
     weatherData.location.localtime,
     'eeee do',
   )}`;
+
   currentStatusLogo.src = weatherData.current.condition.icon;
   currentCity.textContent = `${weatherData.location.name}, ${weatherData.location.country}`;
   currentTemp.textContent = `${weatherData.current.temp_c} ºC`;
   currentConditionText.textContent = weatherData.current.condition.text;
+
   daysLogos.forEach((logo, index) => {
     const domLogo = logo;
     domLogo.src = weatherData.forecast.forecastday[index].day.condition.icon;
   });
+
   weekDays.forEach((day, index) => {
     const domDay = day;
     domDay.textContent = format(
@@ -82,10 +94,13 @@ const getCurrrentLocationWeather = async () => {
     const domValue = value;
     domValue.textContent = `${weatherData.forecast.forecastday[index].day.maxtemp_c}º / ${weatherData.forecast.forecastday[index].day.mintemp_c}º`;
   });
+
   tempButton.focus();
+
   firstValue.textContent = `Max Temp: ${weatherData.forecast.forecastday[0].day.maxtemp_c} ºC`;
   secondValue.textContent = `Min Temp: ${weatherData.forecast.forecastday[0].day.mintemp_c} ºC`;
   thirdValue.textContent = `(Feels like): ${weatherData.current.feelslike_c} ºC`;
+
   return weatherData;
 };
 
@@ -182,6 +197,7 @@ getCurrrentLocationWeather().catch((error) => {
   }
   alert(error);
 });
+
 unitsButton.addEventListener('click', handleTemperature);
 
 tempButton.addEventListener('click', () => {
