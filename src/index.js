@@ -41,7 +41,7 @@ const getCurrrentLocationWeather = async () => {
   if (!response.ok) {
     throw Error(weatherData.error.message);
   } else {
-    currentDate.textContent = `Today, ${format(weatherData.location.localtime, 'eee do')}`;
+    currentDate.textContent = `Today, ${format(weatherData.location.localtime, 'eeee do')}`;
     currentStatusLogo.src = weatherData.current.condition.icon;
     currentCity.textContent = `${weatherData.location.name}, ${weatherData.location.country}`;
     currentTemp.textContent = `${weatherData.current.temp_c} ºC`;

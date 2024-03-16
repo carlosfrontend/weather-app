@@ -22,12 +22,15 @@ body {
 #weather-container {
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
 }
 
 #search-form {
-  display: grid;
-  grid-template-columns: 1fr auto auto;
-  padding: 1em;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 0.5em;
   height: 10vh;
   gap: 0.5em;
 }
@@ -57,25 +60,26 @@ input[type="search"]::placeholder {
   color: #bcb8b3;
   font-weight: 200;
   padding: 0.5em;
+  font-size: 1.4rem;
 }
 
 .units-button {
-  height: 30px;
-  width: 30px;
+  height: 40px;
+  width: 40px;
   background-color: rgb(3, 106, 150);
   color: #ffffff;
   border-radius: 10%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.5em;
   font-weight: 400;
   outline: none;
   border: none;
   cursor: pointer;
 }
 
-.f-button:focus, .units-button.change-color {
+.f-button:focus,
+.units-button.change-color {
   background-color: rgba(255, 255, 255, 0.872);
   color: #022f42;
 }
@@ -84,13 +88,13 @@ input[type="search"]::placeholder {
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: 0.5em;
 }
 
 .date {
   color: #ffffff;
   font-style: italic;
   font-weight: 600;
+  margin-top: 1em;
 }
 
 #location-container {
@@ -98,7 +102,7 @@ input[type="search"]::placeholder {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1em;
+  padding: 0.5em;
 }
 
 .location,
@@ -122,7 +126,7 @@ input[type="search"]::placeholder {
 }
 
 #features-container {
-  padding: 1em;
+  padding: 0 1em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -142,13 +146,14 @@ input[type="search"]::placeholder {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgb(30 53 61 / 74%);
   border-radius: 10px;
+  align-self: center;
+  margin-top: 1em;
 }
 
 .f-button {
   width: 45vw;
-  height: 4vh;
+  height: 6vh;
   background-color: rgb(3, 106, 150);
   border: none;
   outline: none;
@@ -161,12 +166,22 @@ input[type="search"]::placeholder {
   color: #ffffff;
   font-weight: 500;
 }
-
+#daily-container {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1em;
+  align-self: center;
+  border-radius: 10px;
+}
 .day-container {
   width: 100%;
   align-items: center;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
+  gap: 1.2em;
 }
 .day,
 .max-min-value {
@@ -186,8 +201,7 @@ input[type="search"]::placeholder {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: rgb(30 53 61 / 74%);
-  margin: 1em 0;
+  margin-top: 0.5em;
 }
 
 .max-min-value {
@@ -214,10 +228,26 @@ input[type="search"]::placeholder {
   background-color: #ffffff;
 }
 
+.status-logo {
+  width: 50px;
+}
+.days-logo {
+  width: 40px;
+  height: 40px;
+}
+.temp {
+  font-size: 2.1rem;
+}
+
 @media screen and (min-width: 768px) {
   #search-form {
-    grid-template-columns: 0.5fr auto 0.5fr;
-    align-items: center;
+    width: 100%;
+    justify-content: center;
+    gap: 2em;
+  }
+
+  #search {
+    width: 60%;
   }
 
   #units-container {
@@ -226,7 +256,7 @@ input[type="search"]::placeholder {
     align-items: center;
   }
   .f-button {
-    height: 5vh;
+    height: 6vh;
     width: 22vw;
     font-size: 1.2rem;
   }
@@ -244,27 +274,27 @@ input[type="search"]::placeholder {
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
   }
-  .daily-item {
-    width: 48%;
-    margin: 0.5em 0;
+  .days-logo {
+    width: 60px;
+    height: 60px;
   }
 }
 
 @media screen and (min-width: 1024px) {
   #search-form {
-    grid-template-columns: .8fr auto 1fr;
-    align-items: center;
+    margin-top: 1em;
+    width: 80%;
+    justify-content: right;
+    gap: 2em;
   }
-
-  #search{
+  #search {
+    width: 50%;
     font-size: 1.5rem;
     height: 60px;
   }
 
-  .magnify-logo{
+  .magnify-logo {
     height: 50px;
     width: 50px;
   }
@@ -281,18 +311,25 @@ input[type="search"]::placeholder {
     display: flex;
     justify-content: center;
     align-items: center;
+    justify-self: center;
   }
 
-  .city{
+  .city {
     font-size: 3rem;
   }
 
-  .temp, .status-text{
-    font-size: 1.3rem;
+  .temp,
+  .status-text {
+    font-size: 2rem;
+    padding-top: 1em;
+  }
+  #features-nav {
+    justify-content: center;
+    gap: 4em;
   }
   .f-button {
     height: 6vh;
-    width: 14vw;
+    width: 13vw;
     font-size: 1.4rem;
   }
 
@@ -314,8 +351,16 @@ input[type="search"]::placeholder {
     align-items: center;
   }
   .daily-item {
-    height: 6vh;
+    height: 4vh;
     width: 49%;
     margin: 0.6em 0;
+  }
+  .status-logo {
+    width: 60px;
+    height: 60px;
+  }
+  .date {
+    margin-top: 1em;
+    font-size: 1.4rem;
   }
 }
