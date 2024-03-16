@@ -37,8 +37,19 @@ magnifyLogo.src = magLogo;
 giphyLogo.src = gifLogo;
 carlosfrontendLogo.src = carlosLogo;
 
+function showLoading() {
+  document.getElementById('loadingOverlay').style.display = 'flex';
+}
+
+function hideLoading() {
+  document.getElementById('loadingOverlay').style.display = 'none';
+}
+
+window.addEventListener('load', hideLoading);
+
 const getCurrentLocationBackground = async (condition) => {
   const myStatus = condition;
+  showLoading();
   const response = await fetch(
     `https://api.giphy.com/v1/gifs/translate?api_key=uU7BhEfEscbnMatQy6DkKmF7hapwlMBD&s=${myStatus} weather`,
     { mode: 'cors' },
@@ -51,6 +62,7 @@ const getCurrentLocationBackground = async (condition) => {
 
   const backgroundData = await response.json();
   document.body.style.backgroundImage = `url(${backgroundData.data.images.original.url})`;
+  hideLoading();
 };
 
 const getCurrrentLocationWeather = async () => {
@@ -68,6 +80,7 @@ const getCurrrentLocationWeather = async () => {
   getCurrentLocationBackground(weatherData.current.condition.text).catch(
     (error) => alert(error),
   );
+
   currentDate.textContent = `Today, ${format(
     weatherData.location.localtime,
     'eeee do',
@@ -100,7 +113,6 @@ const getCurrrentLocationWeather = async () => {
   firstValue.textContent = `Max Temp: ${weatherData.forecast.forecastday[0].day.maxtemp_c} ºC`;
   secondValue.textContent = `Min Temp: ${weatherData.forecast.forecastday[0].day.mintemp_c} ºC`;
   thirdValue.textContent = `(Feels like): ${weatherData.current.feelslike_c} ºC`;
-
   return weatherData;
 };
 
@@ -224,6 +236,5 @@ searchForm.addEventListener('submit', (e) => {
   getCurrrentLocationWeather().catch((error) => {
     alert(error);
   });
-
   searchInput.value = '';
 });

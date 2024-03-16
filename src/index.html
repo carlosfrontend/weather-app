@@ -12,6 +12,9 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
+    <div class="loading-overlay" id="loadingOverlay">
+      <div class="loading-spinner"></div>
+    </div>
     <div id="weather-container">
       <form method="post" action="/" id="search-form">
         <input
