@@ -1,58 +1,54 @@
-import './styles/main.css';
-import { format } from 'date-fns';
+import "./styles/main.css";
+import { format } from "date-fns";
 
-const magLogo = new URL('./images/magnify.svg', import.meta.url);
-const gifLogo = new URL(
-  './images/Poweredby_100px-White_VertLogo.png',
-  import.meta.url,
-);
+const magLogo = new URL("./images/magnify.svg", import.meta.url);
+
 const defaultbackgroundUrl = new URL(
-  './images/nasa-i9w4Uy1pU-s-unsplash.jpg',
-  import.meta.url,
+  "./images/nasa-i9w4Uy1pU-s-unsplash.jpg",
+  import.meta.url
 );
 
-const carlosLogo = new URL('./images/carlosfrontend-logo.png', import.meta.url);
-const magnifyLogo = document.querySelector('.magnify-logo');
-const giphyLogo = document.querySelector('#giphy-logo');
-const carlosfrontendLogo = document.querySelector('#carlosfrontend-logo');
-const unitsButton = document.querySelector('.units-button');
-const currentDate = document.querySelector('.date');
-const currentCity = document.querySelector('.city');
-const currentStatusLogo = document.querySelector('.status-logo');
-const currentTemp = document.querySelector('.temp');
-const currentConditionText = document.querySelector('.status-text');
-const daysLogos = [...document.querySelectorAll('.days-logo')];
-const weekDays = [...document.querySelectorAll('.weekday')];
-const maxMinValues = [...document.querySelectorAll('.max-min-value')];
-const tempButton = document.querySelector('#temp-button');
-const atmosButton = document.querySelector('#atmos-button');
-const windButton = document.querySelector('#wind-button');
-const firstValue = document.querySelector('#first');
-const secondValue = document.querySelector('#second');
-const thirdValue = document.querySelector('#third');
-const searchForm = document.querySelector('#search-form');
-const searchInput = document.querySelector('#search');
-let URI = 'https://api.weatherapi.com/v1/forecast.json?key=4d9f03d07f3643cd876174147240803&q=auto:ip&days=3&aqi=no/ip.json';
+const carlosLogo = new URL("./images/carlosfrontend-logo.png", import.meta.url);
+const magnifyLogo = document.querySelector(".magnify-logo");
+
+const carlosfrontendLogo = document.querySelector("#carlosfrontend-logo");
+const unitsButton = document.querySelector(".units-button");
+const currentDate = document.querySelector(".date");
+const currentCity = document.querySelector(".city");
+const currentStatusLogo = document.querySelector(".status-logo");
+const currentTemp = document.querySelector(".temp");
+const currentConditionText = document.querySelector(".status-text");
+const daysLogos = [...document.querySelectorAll(".days-logo")];
+const weekDays = [...document.querySelectorAll(".weekday")];
+const maxMinValues = [...document.querySelectorAll(".max-min-value")];
+const tempButton = document.querySelector("#temp-button");
+const atmosButton = document.querySelector("#atmos-button");
+const windButton = document.querySelector("#wind-button");
+const firstValue = document.querySelector("#first");
+const secondValue = document.querySelector("#second");
+const thirdValue = document.querySelector("#third");
+const searchForm = document.querySelector("#search-form");
+const searchInput = document.querySelector("#search");
+let URI =
+  "https://api.weatherapi.com/v1/forecast.json?key=4d9f03d07f3643cd876174147240803&q=auto:ip&days=3&aqi=no/ip.json";
 magnifyLogo.src = magLogo;
-giphyLogo.src = gifLogo;
-carlosfrontendLogo.src = carlosLogo;
 
 function showLoading() {
-  document.getElementById('loadingOverlay').style.display = 'flex';
+  document.getElementById("loadingOverlay").style.display = "flex";
 }
 
 function hideLoading() {
-  document.getElementById('loadingOverlay').style.display = 'none';
+  document.getElementById("loadingOverlay").style.display = "none";
 }
 
-window.addEventListener('load', hideLoading);
+window.addEventListener("load", hideLoading);
 
 const getCurrentLocationBackground = async (condition) => {
   const myStatus = condition;
   showLoading();
   const response = await fetch(
     `https://api.giphy.com/v1/gifs/translate?api_key=uU7BhEfEscbnMatQy6DkKmF7hapwlMBD&s=${myStatus} weather`,
-    { mode: 'cors' },
+    { mode: "cors" }
   );
 
   if (!response.ok) {
@@ -66,24 +62,24 @@ const getCurrentLocationBackground = async (condition) => {
 };
 
 const getCurrrentLocationWeather = async () => {
-  const response = await fetch(URI, { mode: 'cors' });
+  const response = await fetch(URI, { mode: "cors" });
 
   if (!response.ok && response.status === 403) {
-    throw new Error('API key has been disabled.');
+    throw new Error("API key has been disabled.");
   } else if (!response.ok && response.status === 401) {
-    throw new Error('API key not provided.');
+    throw new Error("API key not provided.");
   } else if (!response.ok && response.status === 400) {
-    throw new Error('You need put a city name in the search field!');
+    throw new Error("You need put a city name in the search field!");
   }
 
   const weatherData = await response.json();
   getCurrentLocationBackground(weatherData.current.condition.text).catch(
-    (error) => alert(error),
+    (error) => alert(error)
   );
 
   currentDate.textContent = `Today, ${format(
     weatherData.location.localtime,
-    'eeee do',
+    "eeee do"
   )}`;
 
   currentStatusLogo.src = weatherData.current.condition.icon;
@@ -100,7 +96,7 @@ const getCurrrentLocationWeather = async () => {
     const domDay = day;
     domDay.textContent = format(
       weatherData.forecast.forecastday[index].date,
-      'eeee',
+      "eeee"
     );
   });
   maxMinValues.forEach((value, index) => {
@@ -197,37 +193,37 @@ const showDefaultWeatherInFarenheit = async () => {
 };
 
 const handleTemperature = () => {
-  unitsButton.textContent = unitsButton.textContent === 'ºC' ? 'ºF' : 'ºC';
-  unitsButton.classList.toggle('change-color');
-  if (unitsButton.textContent === 'ºC') showDefaultWeatherInCelsius();
-  if (unitsButton.textContent === 'ºF') showDefaultWeatherInFarenheit();
+  unitsButton.textContent = unitsButton.textContent === "ºC" ? "ºF" : "ºC";
+  unitsButton.classList.toggle("change-color");
+  if (unitsButton.textContent === "ºC") showDefaultWeatherInCelsius();
+  if (unitsButton.textContent === "ºF") showDefaultWeatherInFarenheit();
 };
 
 getCurrrentLocationWeather().catch((error) => {
-  if (error.message === 'Failed to fetch') {
-    alert('You need a Internet conexion');
+  if (error.message === "Failed to fetch") {
+    alert("You need a Internet conexion");
   }
   alert(error);
 });
 
-unitsButton.addEventListener('click', handleTemperature);
+unitsButton.addEventListener("click", handleTemperature);
 
-tempButton.addEventListener('click', () => {
-  if (unitsButton.textContent === 'ºC') showDefaultWeatherInCelsius();
-  if (unitsButton.textContent === 'ºF') showDefaultWeatherInFarenheit();
+tempButton.addEventListener("click", () => {
+  if (unitsButton.textContent === "ºC") showDefaultWeatherInCelsius();
+  if (unitsButton.textContent === "ºF") showDefaultWeatherInFarenheit();
 });
 
-atmosButton.addEventListener('click', () => {
-  if (unitsButton.textContent === 'ºC') showAtomosInternationalSystem();
-  if (unitsButton.textContent === 'ºF') showAtomosEnglishSystem();
+atmosButton.addEventListener("click", () => {
+  if (unitsButton.textContent === "ºC") showAtomosInternationalSystem();
+  if (unitsButton.textContent === "ºF") showAtomosEnglishSystem();
 });
 
-windButton.addEventListener('click', () => {
-  if (unitsButton.textContent === 'ºC') showWindInternationalSystem();
-  if (unitsButton.textContent === 'ºF') showWindEnglishSystem();
+windButton.addEventListener("click", () => {
+  if (unitsButton.textContent === "ºC") showWindInternationalSystem();
+  if (unitsButton.textContent === "ºF") showWindEnglishSystem();
 });
 
-searchForm.addEventListener('submit', (e) => {
+searchForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const query = searchInput.value;
 
@@ -236,5 +232,5 @@ searchForm.addEventListener('submit', (e) => {
   getCurrrentLocationWeather().catch((error) => {
     alert(error);
   });
-  searchInput.value = '';
+  searchInput.value = "";
 });
